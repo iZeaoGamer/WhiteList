@@ -1,0 +1,7 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/alvin0319/WhiteList
+branches:
+- master
+projects:
+  WhiteList:
+    path: "/"
+...
