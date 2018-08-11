@@ -9,7 +9,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 
 class WhiteList extends PluginBase implements Listener{
-	public function onEnable(){
+	public function onEnable() : void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		@mkdir ($this->getDataFolder());
 		$this->config = new Config($this->getDataFolder() . "Config.yml", Config::YAML, [
@@ -24,7 +24,7 @@ class WhiteList extends PluginBase implements Listener{
         $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task);
                                         $task->setHandler($handler);
 	}
-	public function onJoin(PlayerJoinEvent $event) {
+	public function onJoin(PlayerJoinEvent $event) : void{
 	    if ($this->db["test"] === true) {
 	        if (! $event->getPlayer()->isOp()) {
 	            $event->getPlayer()->kick ($this->m["msg"]);
