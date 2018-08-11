@@ -19,4 +19,3 @@ use pocketmine\scheduler\Task;
 		       }
 		   }
 	}
-	}
