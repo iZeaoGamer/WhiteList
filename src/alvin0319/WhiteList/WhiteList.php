@@ -7,7 +7,6 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\utils\Config;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\scheduler\Task;
 
 class WhiteList extends PluginBase implements Listener{
 	public function onEnable(){
@@ -21,21 +20,9 @@ class WhiteList extends PluginBase implements Listener{
 		    "msg" => "현재 서버는 점검중입니다. \n자세한 내용은 서버 커뮤니티의 공지를 참고해주세요"
 		]);
 		$this->m = $this->msg->getAll();
-		$this->getScheduler()->scheduleRepeatingTask (new class ($this) extends Task {
-		   private $owner;
-		   public function __construct(WhiteList $owner) {
-		       $this->owner = $owner;
-		   }
-		   public function onRun(int $currentTick) {
-		       if ($this->owner->db["test"] === true) {
-		           foreach ($this->owner->getServer()->getOnlinePlayers() as $player) {
-		               if (! $player->isOp()) {
-		                   $player->kick ($this->owner->m["msg"]);
-		               }
-		           }
-		       }
-		   }
-		}, 20);
+		$task = new WhitelistTask($this->plugin);
+        $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task);
+                                        $task->setHandler($handler);
 	}
 	public function onJoin(PlayerJoinEvent $event) {
 	    if ($this->db["test"] === true) {
@@ -87,4 +74,3 @@ class WhiteList extends PluginBase implements Listener{
 	    $this->config->save();
 	}
 }
-?>
