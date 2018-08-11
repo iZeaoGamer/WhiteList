@@ -57,7 +57,7 @@ class WhiteList extends PluginBase implements Listener{
 	        if ($args[0] === "on") {
 	            $this->db["test"] = true;
 	            $this->save();
-	            $this->getLogger()->info ("§l§7[" . $sender->getName() . ": 허용 목록을 활성화시켰습니다]");
+	            $this->getServer()->getLogger()->info ("§l§7[" . $sender->getName() . ": 허용 목록을 활성화시켰습니다]");
 	            foreach ($this->getServer()->getOnlinePlayers() as $iop) {
 	                if ($iop->isOp()) {
 	                    $iop->sendMessage ("§l§7[" . $sender->getName() . ": 허용 목록을 활성화시켰습니다]");
@@ -72,7 +72,7 @@ class WhiteList extends PluginBase implements Listener{
 	        if ($args[0] === "off") {
 	            $this->db["test"] = false;
 	            $this->save();
-	            $this->getLogger()->info ("§l§7[" . $sender->getName() . ": 허용 목록을 비활성화시켰습니다]");
+	            $this->getServer()->getLogger()->info ("§l§7[" . $sender->getName() . ": 허용 목록을 비활성화시켰습니다]");
 	            foreach ($this->getServer()->getOnlinePlayers() as $iop) {
 	                if ($iop->isOp()) {
 	                    $iop->sendMessage ("§l§7[" . $sender->getName() . ": 허용 목록을 비활성화시켰습니다]");
